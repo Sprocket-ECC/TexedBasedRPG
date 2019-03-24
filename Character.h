@@ -1,3 +1,8 @@
+//Character.h
+//Written by: Ethan Covington
+//Updated on: 3/23/2019
+//Purpose of file is to be the base class for Player Object
+//Managing stats and levling systems
 #pragma once
 #include <iostream>
 #include <string>
@@ -15,7 +20,7 @@ public:
 	
 	Character(const Character &rhs);					//Copy Constructor
 
-	Character(NameType Name);
+	Character(NameType Name);							//Constructor Name only
 	
 	Character(NameType nme, int health, int action,		//Overloaded constructor
 		int level, int experience, int strength, 
@@ -58,7 +63,10 @@ private:
 	};
 
 	struct role_profile {
-		//Skill Array[]
+		//Role Name
+		RoleType RoleName;
+
+		//Abilities Array[]
 		///NOT IMPLEMENTED YET
 
 		//Stats adjustor 
@@ -67,28 +75,28 @@ private:
 		bool roleStatsUpdated = false;
 	};
 	//Function to read skill list file
-	void readSkillList(RoleType role); ///NOT IMPLEMENTED YET
+	//void readSkillList(RoleType role); ///NOT IMPLEMENTED YET
 public:
 	//Updates CharacterProfile stats to increase by Role stats
-	void updateRoleStats();
+	void virtual updateRoleStats();
 
 	//Updates stats 
-	void updateStats(int health, int action, int strength, int dexerity, int defense, int charisma, int intellect);
+	void virtual updateStats(int health, int action, int strength, int dexerity, int defense, int charisma, int intellect);
 
 	//Upgrade lvl stat
-	void upgradeLVL();									//Upgrade character by one level
+	void virtual upgradeLVL();									//Upgrade character by one level
 
 	//Upgrade lvl stat with all exp						
-	int upgradeMaxLvl();								//Upgrade character lvl by total amount of exp
+	int virtual upgradeMaxLvl();								//Upgrade character lvl by total amount of exp
 
 	//Check if enough exp to lvl up
-	bool ifEnoughExp();									//Check Experience to level Pawn
+	bool virtual ifEnoughExp();									//Check Experience to level Pawn
 
-	//Calculate Ap amount per lvl upgraded
-	int calculateStatPointsForCurrentLVL();
+	//Calculate SP amount per lvl upgraded
+	int virtual calculateStatPointsForCurrentLVL();
 
 	//Calculate Total Skill points amount for multiple lvl upgraded
-	int calculateTotalStatPoints();
+	int virtual calculateTotalStatPoints();
 	
 
 #pragma region Setters/Getters
@@ -150,3 +158,5 @@ public:
 	std::unique_ptr<role_profile> RoleProfile = std::make_unique<role_profile>();
 
 };
+
+

@@ -1,3 +1,6 @@
+//Character.cpp
+//Written by: Ethan Covington
+//Updated on: 3/23/2019
 #include "Character.h"
 #pragma region Construct/Copy/Deconstruct
 //Constructor
@@ -10,7 +13,7 @@ Character::Character()
 Character::Character(NameType Name)
 {
 	character_profile();
-	CharacterProfile->name = Name;
+	CharacterProfile->name = Name;//Sets character name to Name
 }
 
 //Overloaded Constructor
@@ -25,14 +28,6 @@ Character::Character(const Character &rhs)
 {
 	character_profile(rhs.CharacterProfile->name, rhs.CharacterProfile->hp, rhs.CharacterProfile->ap, rhs.CharacterProfile->lvl, rhs.CharacterProfile->exp,
 		rhs.CharacterProfile->str, rhs.CharacterProfile->dex, rhs.CharacterProfile->def, rhs.CharacterProfile->chr, rhs.CharacterProfile->intel);
-
-	////Copy rhs Inventory
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	this->CharacterProfile->Inventory[i].newItem->name = rhs.CharacterProfile->Inventory[i].newItem->name;
-	//	this->CharacterProfile->Inventory[i].newItem->apWeight = rhs.CharacterProfile->Inventory[i].newItem->apWeight;
-	//	this->CharacterProfile->Inventory[i].newItem->trt = rhs.CharacterProfile->Inventory[i].newItem->trt;
-	//}
 }
 
 //Deconstructor
@@ -77,9 +72,9 @@ void Character::upgradeLVL()
 {
 	if (ifEnoughExp())
 	{
-		int expPerLevel = pow(CharacterProfile->lvl, 3); //Exp Per Level algorithm
-		CharacterProfile->exp -= expPerLevel; //Suptract exp used to level player
-		CharacterProfile->lvl++; //Increase player level by one 
+		int expPerLevel = pow(CharacterProfile->lvl, 3);//Exp Per Level algorithm
+		CharacterProfile->exp -= expPerLevel;			//Suptract exp used to level player
+		CharacterProfile->lvl++;						//Increase player level by one 
 	}
 }
 
@@ -89,8 +84,8 @@ int Character::upgradeMaxLvl()
 	while (ifEnoughExp())
 	{
 		int expPerLevel = pow(CharacterProfile->lvl, 3); //Exp Per Level algorithm
-		CharacterProfile->exp -= expPerLevel; //Suptract exp used to level player
-		CharacterProfile->lvl++; //Increase player level by one 
+		CharacterProfile->exp -= expPerLevel;			//Suptract exp used to level player
+		CharacterProfile->lvl++;						//Increase player level by one 
 		numOfLvl++;
 	}
 	return numOfLvl;
@@ -111,7 +106,7 @@ bool Character::ifEnoughExp()
 
 int Character::calculateStatPointsForCurrentLVL()
 {
-	int newSPAmount = (int)CharacterProfile->lvl *1.3;
+	int newSPAmount = (int)CharacterProfile->lvl * 1.3; //Calculate SP per current lvl
 	return newSPAmount;
 }
 
@@ -119,11 +114,11 @@ int Character::calculateTotalStatPoints()
 {
 	int totalSP = 0;
 	int beginningLvl = CharacterProfile->lvl;
-	beginningLvl++;
-	int totalLvlGained = upgradeMaxLvl();
-	for (int i = 0; i < totalLvlGained; i++)
+	beginningLvl++;								//First lvl that is upgraded
+	int totalLvlGained = upgradeMaxLvl();		//Total lvls gained
+	for (int i = 0; i < totalLvlGained; i++)	//Loop for number of lvls gained
 	{
-		totalSP += (int)beginningLvl * 1.3;
+		totalSP += (int)beginningLvl * 1.3;		//Calculate SP per lvl
 	}
 
 	return totalSP;
