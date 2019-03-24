@@ -35,12 +35,6 @@ private:
 		NameType name;
 		int hp, ap, lvl, exp, str, dex, def, chr, intel;
 
-		////Equipment Slots
-		////[0] = Head, [1] = Neck, [2] = Chest, [3] = L. Hand, [4] = R. Hand, [5] = Legs, [6] = Feet
-		//std::unique_ptr<Item[]> EquipmentSlots = std::make_unique<Item[]>(7);
-		////Inventory
-		//std::unique_ptr<Item[]> Inventory = std::make_unique<Item[]>(20);
-
 		//character_profile constructor
 		character_profile() : name("No_name_set"), hp(1), ap(1), lvl(1), exp(0), 
 			str(1), def(1), chr(1), intel(1) {}
